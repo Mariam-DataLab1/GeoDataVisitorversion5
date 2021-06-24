@@ -1,0 +1,6 @@
+1- popup appear from codes
+
+
+2- useState hook:
+
+https://www.youtube.com/watch?v=O6P86uwfdR0

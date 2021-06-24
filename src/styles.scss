@@ -1,0 +1,362 @@
+/**
+App
+ */
+* {
+  margin: 0;
+  box-sizing: border-box;
+
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body,
+.App,
+#root {
+  height: 100vh;
+}
+
+.App {
+  align-items: stretch;
+  display: flex;
+  flex-direction: row;
+}
+//mariam
+@media (max-width:530px) {
+  .App {
+    display:flex;
+    flex-direction: column;
+  }
+}
+
+.mapHolder {
+  flex: 0 1 67%;
+  border: 3px solid #87ceeb;
+  // border-top: 4px solid #87ceeb;
+  display: flex;
+  // overflow-y: scroll;
+  // overflow-x: scroll;
+}
+
+///mariam
+.mapHolderLoading {
+  flex: 2 1 0;
+  display: flex;
+  border: 2px solid #87ceeb;
+  flex-direction: column;
+}
+// mariam
+// .mapHolderLoading {
+//   flex: 1.5;
+//   display: flex;
+//   flex-direction: column;
+// }
+
+.goldMarker {
+  //Make sure this is drawn over other markers
+  z-index: 9999 !important;
+}
+/**
+Map
+ */
+#map {
+  flex: 1;
+}
+
+.marker {
+  text-align: left;
+  font-weight: 300;
+  overflow-y: scroll;
+  max-height: 100px;
+}
+
+.popUpMouseOver {
+  text-align: center;
+  font-size: 90%;
+}
+
+.popUpMouseOver > .subTextMarker {
+  font-size: 80%;
+}
+
+/*
+Linker deel
+ */
+.headerInfo {
+  flex: 1;
+  // flex: 0 1 33%;
+  display: flex;
+  flex-direction: column;
+  // width: 100px;
+  overflow-x: scroll;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding-left: 2%;
+  margin: 0 0 0 0;
+}
+
+.headerEtc {
+  background-color: rgba(255, 252, 252, 0.932);
+  flex-direction: column;
+  border: 2px solid rgba(255, 252, 252, 0.932);
+  box-shadow: 0.3em 0.3em 1em rgba(0, 0, 0, 0.3);
+}
+
+.searchBar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 1px 2px;
+  margin-top: 5%;
+  margin-left:5%;
+  margin-right:4%;
+}
+// no change
+.infoContainer {
+  display: flex;
+  flex:7 1 0;
+  justify-content: space-around;
+  // justify-content: flex-start;
+  // margin-bottom: 6%;
+  // margin-right:5%;
+}
+
+.apiContainer {
+  flex: 0 1 45%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.apiContainer span {
+  font-weight: 600;
+  font-family: "Arial";
+  font-size: 90%;
+  flex: 0 1 100%;
+  margin-top: 4%;
+  margin-left: 2%;
+  margin-bottom: 2.5%;
+}
+
+.apiContainer input {
+  width: 300px;
+  height: 65%;
+  flex: 0 1 auto;
+  margin-left: 2%;
+  border-radius: 5px;
+  border-width: 1px;
+}
+
+.searchBar button {
+  height: 37px;
+  background-color: #f8fafa;
+  color: #c4bebe;
+  border-width: 1px;
+  border-color: #70685f;
+  border-radius: 6px;
+  font-size: 105%;
+  margin: 55px 60px 0px 10px;
+}
+
+.searchBar button:hover {
+  background-color: #eaecf1;
+  font-weight: bold;
+  color: #302e2e;
+  cursor: pointer;
+}
+
+.searchBar button:focus {
+  outline: none;
+}
+
+.ldWizardLink {
+  font-family: Helvetica;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0% 3% 1% 0%;
+  padding-left: 5%;
+}
+
+.help {
+  font-family: Helvetica;
+  font-size: 13px;
+  font-weight: 500;
+  margin: 0% 3% 1% 0%;
+  text-decoration: none;
+}
+
+.KGs {
+  font-family: Helvetica;
+  text-align: left;
+  font-size: 14px;
+  font-weight: 500;
+  margin: 3% 1% 1% 0%;
+  padding-left: 5%;
+}
+
+ul {
+  padding: 0;
+}
+
+.badge {
+  display: inline-block;
+  margin-right: 0.6em;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  color: #fff;
+  background-color: #6c757d;
+  a {
+    color: white;
+  }
+}
+
+.hoofdText {
+  font-size: 110%;
+  margin-bottom: 0%;
+}
+
+.subText {
+  font-size: 80%;
+}
+
+.objectScreen {
+  padding: 5%;
+}
+
+.objectScreen > h1 {
+  margin-bottom: 1%;
+}
+
+.objectScreen > h3 {
+  color: #2c84cb;
+  margin: 1% 0% 3%;
+}
+
+.namenTable {
+  margin-bottom: 2%;
+}
+
+.attributeSectionObjectScreen {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.attributeSectionObjectScreen td:last-child {
+  overflow-wrap: break-word;
+  width: 60%;
+}
+
+table {
+  word-break: break-word;
+}
+
+.dropDownItem * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1em;
+}
+
+.cogIcon {
+  padding-left: 1%;
+  float: left;
+}
+
+.toast-background {
+  border-radius: 10px;
+  background: white;
+  color: black;
+}
+
+.toast-progress-bar {
+  background: skyblue;
+}
+
+.contextMenuContainer {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  z-index: 500;
+  background: white;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.contextMenuContainer > div > b {
+  font-size: 80%;
+}
+
+.contextMenuContainer > div > span {
+  font-size: 70%;
+}
+
+.contextMenuContainer > div {
+  white-space: nowrap;
+  display: block;
+  margin: 0;
+  padding: 10px 10px;
+  border-radius: 10px;
+
+  &:hover {
+    cursor: pointer;
+    padding: 9px 9px;
+    box-sizing: border-box;
+    border: #2c84cb 1px solid;
+  }
+}
+.list {
+  margin-top: 10%;
+  border: 2px solid hsl(60, 5%, 92%);
+}
+.properties-list {
+  padding: 0;
+  margin-top: 5%;
+  margin-left: 2%;
+  list-style-type: none;
+}
+
+.property {
+  position: relative;
+  margin-left: 30px;
+  padding: 5px 10px;
+  opacity: 0.5;
+  cursor: pointer;
+  transition: all 100ms ease-out;
+
+  &::before {
+    content: " ";
+    position: absolute;
+    height: 15px;
+    width: 15px;
+    border: 1px solid;
+    border-radius: 3px;
+    top: 50%;
+    left: 0;
+    transform: translate(-100%, -50%);
+  }
+
+  &.selected {
+    font-weight: bold;
+    opacity: 1;
+    &::before {
+      background: currentColor;
+    }
+  }
+}
