@@ -2,10 +2,13 @@
 import * as wellKnown from "wellknown";// Well-known text (WKT) is a text markup language for representing vector geometry objects.
 import * as turf from "@turf/turf";
 import _ from "lodash";
-//Sparql query api
+//@Select a Sparql query
 // export const apiAddress = "https://api.labs.kadaster.nl/queries/jiarong-li/PandviewerTest/run"
 // export const apiAddress = "https://api.labs.kadaster.nl/queries/BibiMaryam-SajjadianJaghargh/Geodatabgt/run"
-export const apiAddress = "https://api.labs.kadaster.nl/queries/BibiMaryam-SajjadianJaghargh/Geodatabgttest/run"
+// export const apiAddress = "https://api.labs.kadaster.nl/queries/BibiMaryam-SajjadianJaghargh/Geodatabgttest/run"
+//tekrari export const apiAddress = "https://api.labs.kadaster.nl/queries/dataLab/Geodatabgttest/run"
+// automatically create link data and group them as an object
+export const apiAddress = "https://api.labs.kadaster.nl/queries/BibiMaryam-SajjadianJaghargh/geo-object/run"
 export interface SparqlResults {
     head: Head;
     results: {
@@ -71,11 +74,14 @@ export async function searchResourcesDescriptions( res:SparqlResults) {
                 data = await fetch(`${apiAddress}?lat=${coords[0]}&long=${coords[1]}`).then(result => result.json()).then(result => result[0])
                 // delete data.address
                 delete data.bagShape
-                let browser = 'https://data.labs.kadaster.nl/kadaster/knowledge-graph/browser?resource='
-                data.bag = `${browser}${data.bag}`
-                data.bgt = `${browser}${data.bgt}`
-                data.brt = `${browser}${data.brt}`
-                data.nummeraanduiding = `${browser}${data.nummeraanduiding}`
+                delete data.punt
+                delete data.BagShape0
+                
+                // let browser = 'https://data.labs.kadaster.nl/kadaster/knowledge-graph/browser?resource='
+                // data.bag = `${browser}${data.bag}`
+                // data.bgt = `${browser}${data.bgt}`
+                // data.brt = `${browser}${data.brt}`
+                // data.nummeraanduiding = `${browser}${data.nummeraanduiding}`
             } catch (error) {}
 
             return {
@@ -87,26 +93,6 @@ export async function searchResourcesDescriptions( res:SparqlResults) {
     }).filter(i => i));
 }
 
-/**
- * Get the coordinate query result from the api
- * @param lat 
- * @param long 
- */
-export async function runQuery(lat: string, long: string): Promise<SparqlResults> {
-    let sufUrl = '?lat=' + lat + '&long=' + long;
-    let runApi = sufUrl; 
-    const result = await fetch(runApi, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-            Accept: "application/sparql-results+json"
-        },
-    });
-    if (result.status > 300) {
-        throw new Error("Request with response " + result.status);
-    }
-    return JSON.parse(await result.text());
-}
 
 /**
  * Get the text search result from user's api
@@ -127,4 +113,3 @@ export async function searchQuery(endpoint:string): Promise<SparqlResults> {
     }
     return result.json();
 }
-

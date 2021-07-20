@@ -66,31 +66,10 @@ const App: React.FC = () => {
     return () => {};
   }, []);
 
-  /**
-     * Trigger context query
-     //  */
-
-  React.useEffect(() => {
-    if (state.coordinateQuery) {
-      sBP
-        .getFromCoordinates(
-          state.coordinateQuery.lat,
-          state.coordinateQuery.lng
-        )
-        .then((res) => {
-          dispatch({ type: "coordinate_search_success", results: res as any });
-        })
-        .catch(() => {
-          dispatch({ type: "coordinate_search_error" });
-        });
-    }
-  }, [state.coordinateQuery]);
-
-  /**
+   /**
      * Trigger search
      //  */
   //useEffect is hook in react Mariam change save in variable and move to
-
   React.useEffect(() => {
     if (state.textSearchQuery && state.textSearchQuery.endpoint) {
       sBP
@@ -103,14 +82,14 @@ const App: React.FC = () => {
         });
     }
   }, [state.textSearchQuery]);
-
+// mew case Mariam
   React.useEffect(() => {
     dispatch({
       type: "resetProperties",
       value: Object.keys(state.searchResults[0] || {}),
     });
   }, [state.searchResults]);
-
+// new cases Mariam
   React.useEffect(() => {
     if (state.selectedObject) {
       try {
@@ -147,10 +126,12 @@ const App: React.FC = () => {
   /**
    * input API
    */
-  const [endpoint, setEndpoint] = useState(
-    "https://api.data.pldn.nl/queries/Mariam/Query-46/run"
-  );
-  return (
+  // const username = "mariam"
+  // const dataset = "Query-29"
+  // const userApi = "https://api.data.pldn.nl/queries/"+username+"/"+dataset+"/run"
+  const userApi = "https://api.data.pldn.nl/queries/mariam/Query-46/run"
+  const [endpoint, setEndpoint] = useState(userApi);
+     return (
     <section className="App">
       <div className="headerInfo">
         <div className="headerEtc">
@@ -184,7 +165,7 @@ const App: React.FC = () => {
             </div>
             <div className="help">
               <a
-                href="https://labs.kadaster.nl/demonstrators/"
+                href="C:\mariam\codes\Geodata-step5-28-6-2021-clean6\src\assets\help\help.html"
                 target="_blank"
                 rel="noreferrer noopener"
                 style={{ color: "black" }}
@@ -220,7 +201,17 @@ const App: React.FC = () => {
             rel="noreferrer noopener"
             style={{ color: "black" }}
           >
-            Knowldge Graphs
+            Knowldge Graph 1
+          </a>
+        </div>
+        <div className="KGs">
+          <a
+            href="https://data.labs.kadaster.nl/kadaster/kg"
+            target="_blank"
+            rel="noreferrer noopener"
+            style={{ color: "black" }}
+          >
+            Knowldge Graph 2
           </a>
         </div>
         <div className="list" style={{ overflow: "auto" }}> 
@@ -232,7 +223,7 @@ const App: React.FC = () => {
                 onClick={() =>
                   dispatch({
                     type: "setProperties",
-                    value: { ...state.properties, [k]: !state.properties[k] },
+                    value: { ...state.properties, [k]: !state.properties[k] },// this div created by Mariam
                   })
                 } //three dots is for spread operators or rest parameters. It allows an array expression or string or anything which can be iterating to be expanded in places where zero or more arguments for function calls or elements for array are expected.
               >

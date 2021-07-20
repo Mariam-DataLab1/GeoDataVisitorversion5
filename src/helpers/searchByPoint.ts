@@ -1,16 +1,16 @@
 
-import { searchResourcesDescriptions,runQuery,searchQuery} from "./sparql"; 
+import { searchResourcesDescriptions,searchQuery} from "./sparql"; //runQuery
 /**
  * 
  * @param lat 
  * @param lng 
  * @returns 
  */
-export async function getFromCoordinates(lat : string, lng: string) {
-  const results = await runQuery(lat,lng);
-  console.log(await results);
+// export async function getFromCoordinates(lat : string, lng: string) {
+//   const results = await runQuery(lat,lng);
+//   console.log(await results);
  
-}
+// }
 
 /**
  * @param Endpoint

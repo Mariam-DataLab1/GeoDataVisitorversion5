@@ -32,9 +32,7 @@ export type Action =
       value: { x: number; y: number; values: Array<SingleObject> };
     }
   | { type: "closeClickedLayer" }
-  | { type: "coordinate_search_error" }
   | { type: "coordinate_search_start"; value: CoordinateQuery }
-  | { type: "coordinate_search_success"; results: State["searchResults"] }
   | { type: "reset" }
   | { type: "resetSelectedObject" }
   | { type: "search_error" } //text search error
@@ -42,13 +40,12 @@ export type Action =
   | { type: "search_success"; results: State["searchResults"] } //text search start
   | { type: "selectObject"; value: SingleObject }
   | { type: "setMapClustered"; value: boolean }
-  | {
-      type: "textSearch";
+  | { type: "textSearch";
       value: { x: string; y: string; values: Array<SingleObject> };
     } //text search
   | { type: "zoomChange"; value: number }
   | { type: "resetProperties"; value: Array<string> }
-  | { type: "setProperties"; value: { [key: string]: boolean } };
+  | { type: "setProperties"; value: { [key: string]: boolean } };// new case Mariam
 // new case Mariam
 export interface SingleObject {
   sub: string;
@@ -74,13 +71,6 @@ export const reducer: React.Reducer<State, Action> = immer.produce(
         state.coordinateQuery = action.value;
         state.searchResults = [];
         state.selectedObject = undefined;
-        return state;
-      case "coordinate_search_error": /// here is for debug
-        state.isFetching = false;
-        return state;
-      case "coordinate_search_success":
-        state.isFetching = false;
-        state.searchResults = action.results;
         return state;
       case "search_start":
         state.isFetching = true;
@@ -111,22 +101,22 @@ export const reducer: React.Reducer<State, Action> = immer.produce(
       case "closeClickedLayer":
         state.clickedLayer = undefined;
         return state;
-      case "resetProperties":// new case
+      case "resetProperties":// new case Mariam
         state.properties = action.value.reduce(
           (a, b) => (["geo", "sub"].includes(b) ? a : { ...a, [b]: true }),
           {}
         );
         return state;
-      case "setProperties":// new case
+      case "setProperties":// new case Mariam
         state.properties = action.value;
         return state;
       default:
         return state;
-      case "zoomChange":// new case
+      case "zoomChange":
         state.zoomLevel = action.value;
         if (state.zoomLevel < 20 && !state.mapClustered)
           state.mapClustered = true;
-        if (state.zoomLevel >= 20 && state.mapClustered)
+        if (state.zoomLevel>= 20 && state.mapClustered)
           state.mapClustered = false;
         console.log("zoomlevel = " + state.zoomLevel);
         return state;

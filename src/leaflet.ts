@@ -55,7 +55,8 @@ export function init(opts: {
         'Landelijke Voorziening Beeldmateriaal &copy; <a href="https://www.pdok.nl/" target="_blank" rel = "noreferrer noopener">PDOK</a> ',
     }
   );
-  const OSM = L.tileLayer( // new case
+  const OSM = L.tileLayer(
+    // new case
     "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
     {
       attribution:
@@ -85,7 +86,7 @@ export function init(opts: {
   //Add layer control(select basemap) for the last version
   L.control.layers(baseMaps).addTo(map);
 
-  //When you click on the card, all locations get back arround and dispaly Kadaster API in pop-ups.
+  //When you click on the card, all locations get back arround.
   // Send request new case
   map.on("contextmenu", async (e) => {
     let latLong = (e as any).latlng;
@@ -100,12 +101,7 @@ export function init(opts: {
       }
       bagShape = data.bagShape;
       delete data.bagShape;
-      // let browserKG =
-      //   "https://data.labs.kadaster.nl/kadaster/knowledge-graph/browser?resource=";
-      // data.bag = `${browserKG}${data.bag}`;
-      // data.bgt = `${browserKG}${data.bgt}`;
-      // data.brt = `${browserKG}${data.brt}`;
-      // data.nummeraanduiding = `${browserKG}${data.nummeraanduiding}`;
+      delete data.punt;
     } catch (error) {}
 
     if (data) {
@@ -183,15 +179,17 @@ export function init(opts: {
                       <br/>
                       ${Object.keys(feature.properties)
                         .map((k) => {
-                          if (k === "geo") return "Compiled Date:";
+                          // if (k === "sub") var PLDNa = "sub"
+                          // return PLDNa;
 
                           function makeDate(date: Date) {
-                            return new Date(date.getTime()); //<--error here
+                            return new Date(date.getTime()); 
                           }
                           const newDate = new Date(); //
                           const today2 = makeDate(newDate);
-                          if (k === "sub") return today2;
-                          // if (k === "geo" || k === "sub") return "User data set";
+                          if (k === "sub") return "";
+                          // if (k === "geo" || k === "sub") return "";
+                          if (k === "geo") return "Date: "+today2;
                           // change if your have more URI for example add ["BGT", "nummeraanduiding"]
                           if (
                             [
